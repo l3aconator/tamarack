@@ -133,6 +133,9 @@ svg {
 
   .map--tooltip h3 {
     font-size: 16px;
+    line-height: 1rem;
+    margin-bottom: 0px;
+    margin-top: 0px;
   }
 
   .map--tooltip address {
