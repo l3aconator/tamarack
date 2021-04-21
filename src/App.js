@@ -12,7 +12,12 @@ function App() {
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <MapChart setTooltipContent={setContent} />
       </div>
-      <ReactTooltip clickable={true} html={true} backgroundColor="#0D374F">
+      <ReactTooltip
+        clickable={true}
+        html={true}
+        backgroundColor="#0D374F"
+        className="map--tip"
+      >
         {content}
       </ReactTooltip>
     </div>

@@ -145,8 +145,10 @@ const markers = [
 ];
 
 const MapChart = ({ setTooltipContent }) => {
-  const [zoom, setZoom] = useState(1);
-  const [center, setCenter] = useState([0, 0]);
+  const [zoom, setZoom] = useState(window.screen.width <= 480 ? 2 : 1);
+  const [center, setCenter] = useState(
+    window.screen.width <= 480 ? [-75, 45] : [0, 0]
+  );
   const [filter, setFilter] = useState('');
 
   const markersToFilter = markers.filter((marker) => {
