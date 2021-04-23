@@ -116,6 +116,67 @@ const markers = [
     type: 'serviceCenter',
   },
   {
+    name: 'Atlas Air Service AG',
+    address: `Bremen Airport (EDDW)<br />
+    Hanna Kunath Strasse 18, 28199<br />
+    Bremen, Germany<br />
+    +49 421 53658 760`,
+    coordinates: [8.785330192 - 6, 53.041833166 + 12],
+    type: 'serviceCenter',
+  },
+  {
+    name: 'ASG Limited',
+    address: `Guernsey International Airport (EGJB)<br />
+    Guernsey, GY8 0DS, Channel Islands<br />
+    +44 1481 265750`,
+    coordinates: [-2.601164262 - 6, 49.434331596 + 12],
+    type: 'serviceCenter',
+  },
+  {
+    name: 'Bromma Air Maintenance AB',
+    address: `Bromma Airport (ESSB)<br />
+    S-168 67 Bromma, Sweden<br />
+    +46 8 566 190 00`,
+    coordinates: [17.937162918 - 6, 59.352665256 + 12],
+    type: 'serviceCenter',
+  },
+  {
+    name: 'Conal',
+    address: `Av. Santos Dumont (SDCO)<br />
+    1001 Vila Angelica<br />
+    Sorocaba – SP, Brazil 18065-290<br />
+    +55 15 3313 9500`,
+    coordinates: [-43.5525 - 3, -21.45667 + 9],
+    type: 'serviceCenter',
+  },
+  {
+    name: 'Prince Aviation',
+    address: `Belgrade Nikola Tesla Airport (LYBE)<br />
+    Bul. Marsala Tolbuhina 40-42, 11070<br />
+    Belgrade, Serbia<br />
+    +381 11 209 75 85`,
+    coordinates: [20.30416545 - 6, 44.81833006 + 12],
+    type: 'serviceCenter',
+  },
+  {
+    name: 'Signature Technicair',
+    address: `Bournemouth Airport (EGHH)<br />
+    Hangar 100<br />
+    Christchurch, Dorset UK BH23 6NW<br />
+    +44 (0) 1202 573243`,
+    coordinates: [-1.838829978 - 6, 50.774663568 + 12],
+    type: 'serviceCenter',
+  },
+  {
+    name: 'Solojet Aviação',
+    address: `Chacara Aeroporto (SBJD)<br />
+    Av. Emilio Antonon 841<br />
+    Jundiai – SP, Brazil 13212-010<br />
+    +55 11 4582 7899`,
+    coordinates: [-46.88417 - 3, -23.186393 + 9],
+    type: 'serviceCenter',
+  },
+  {
     name: 'Tamarack West Coast Transformation Center',
     address: `Sandpoint Airport (KSZT)<br />
     2021 Industrial Drive<br />
@@ -145,11 +206,16 @@ const markers = [
 ];
 
 const MapChart = ({ setTooltipContent }) => {
+  const rootEl = document.getElementById('root');
+  const defaultFilter = rootEl.getAttribute('data-show');
+  const showFilterControls = JSON.parse(
+    rootEl.getAttribute('data-showFilterControls')
+  );
   const [zoom, setZoom] = useState(window.screen.width <= 480 ? 2 : 1);
   const [center, setCenter] = useState(
     window.screen.width <= 480 ? [-75, 45] : [0, 0]
   );
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState(defaultFilter ? defaultFilter : '');
 
   const markersToFilter = markers.filter((marker) => {
     if (marker.type === filter) return marker;
@@ -161,43 +227,45 @@ const MapChart = ({ setTooltipContent }) => {
 
   return (
     <div className="map--container">
-      <ul className="map--filters">
-        <li>
-          <button
-            type="button"
-            className={filter === '' ? 'active' : ''}
-            onClick={() => setFilter('')}
-          >
-            All
-          </button>
-        </li>
-        <li>
-          <button
-            type="button"
-            className={filter === 'transformationCenter' ? 'active' : ''}
-            onClick={() =>
-              filter === 'transformationCenter'
-                ? setFilter('')
-                : setFilter('transformationCenter')
-            }
-          >
-            Transformation Centers
-          </button>
-        </li>
-        <li>
-          <button
-            type="button"
-            className={filter === 'serviceCenter' ? 'active' : ''}
-            onClick={() =>
-              filter === 'serviceCenter'
-                ? setFilter('')
-                : setFilter('serviceCenter')
-            }
-          >
-            Service Centers
-          </button>
-        </li>
-      </ul>
+      {showFilterControls && (
+        <ul className="map--filters">
+          <li>
+            <button
+              type="button"
+              className={filter === '' ? 'active' : ''}
+              onClick={() => setFilter('')}
+            >
+              All
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              className={filter === 'transformationCenter' ? 'active' : ''}
+              onClick={() =>
+                filter === 'transformationCenter'
+                  ? setFilter('')
+                  : setFilter('transformationCenter')
+              }
+            >
+              Transformation Centers
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              className={filter === 'serviceCenter' ? 'active' : ''}
+              onClick={() =>
+                filter === 'serviceCenter'
+                  ? setFilter('')
+                  : setFilter('serviceCenter')
+              }
+            >
+              Service Centers
+            </button>
+          </li>
+        </ul>
+      )}
       <ul className="map--controls">
         <li>
           <button type="button" onClick={() => setZoom((prev) => prev + 0.25)}>
@@ -333,6 +401,9 @@ const MapChart = ({ setTooltipContent }) => {
                   'United States of America',
                   'United Kingdom',
                   'Canada',
+                  'Mexico',
+                  'Brazil',
+                  'Australia',
                 ];
                 let shouldColor = countries.some(() =>
                   countries.includes(geo.properties.NAME)
@@ -341,8 +412,16 @@ const MapChart = ({ setTooltipContent }) => {
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fill={shouldColor ? '#2392D0' : '#EAEAEC'}
-                    stroke={shouldColor ? '#2392D0' : '#EAEAEC'}
+                    fill={
+                      shouldColor || geo.properties.CONTINENT === 'Europe'
+                        ? '#2392D0'
+                        : '#EAEAEC'
+                    }
+                    stroke={
+                      shouldColor || geo.properties.CONTINENT === 'Europe'
+                        ? '#2392D0'
+                        : '#EAEAEC'
+                    }
                   />
                 );
               })
