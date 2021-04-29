@@ -465,6 +465,25 @@ const MapChart = ({ setTooltipContent }) => {
           )}
         </ZoomableGroup>
       </ComposableMap>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            .rsm-geographies,
+            .rsm-geography {
+              outline: none;
+              border: none;
+            }
+
+
+            path:focus-visible,
+            path:focus {
+              outline: none;
+              border-color: inherit;
+              -webkit-box-shadow: none;
+              box-shadow: none;
+            }`,
+        }}
+      />
     </div>
   );
 };
