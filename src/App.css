@@ -1,5 +1,5 @@
 html {
-  font-family: system-ui, sans-serif;
+  font-family: Inter, sans-serif;
   font-size: 1.25rem;
 }
 
@@ -113,33 +113,24 @@ svg {
   margin-left: 0px;
 }
 
-.map--tooltip h3 {
-  margin-bottom: 8px;
+.map--tooltip {
+  max-width: 180px;
+  padding: 0px;
 }
 
-.map--tooltip address {
-  line-height: 1.2rem;
+.map--tip {
+  max-width: 180px;
+  padding: 8px !important;
+}
+
+.map--tooltip h3 {
+  font-size: 13px;
+  line-height: 1rem;
+  margin-bottom: 0px;
   margin-top: 0px;
 }
 
-@media screen and (max-width: 480px) {
-  .map--tooltip {
-    max-width: 190px;
-  }
-
-  .map--tip {
-    max-width: 190px;
-  }
-
-  .map--tooltip h3 {
-    font-size: 16px;
-    line-height: 1rem;
-    margin-bottom: 0px;
-    margin-top: 0px;
-  }
-
-  .map--tooltip address {
-    line-height: 1rem;
-    font-size: 13px;
-  }
+.map--tooltip address {
+  line-height: 1rem;
+  font-size: 14px;
 }
