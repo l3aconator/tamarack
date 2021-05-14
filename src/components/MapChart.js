@@ -441,8 +441,8 @@ const MapChart = ({ setTooltipContent }) => {
                 key={index}
                 coordinates={coordinates}
                 onClick={() => {
-                  setZoom(2.5);
-                  setCenter(coordinates);
+                  setZoom(window.screen.width <= 480 ? 1 : 2.5);
+                  setCenter(window.screen.width <= 480 ? [0, 0] : coordinates);
                 }}
                 onMouseEnter={() => {
                   setTooltipContent(
@@ -471,7 +471,6 @@ const MapChart = ({ setTooltipContent }) => {
               outline: none;
               border: none;
             }
-
 
             path:focus-visible,
             path:focus {
