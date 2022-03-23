@@ -1,206 +1,206 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState } from "react";
 import {
   ComposableMap,
   Geographies,
   Geography,
   Marker,
   ZoomableGroup,
-} from 'react-simple-maps';
-import geoUrl from '../world.json';
+} from "react-simple-maps";
+import geoUrl from "../world.json";
 
 const markers = [
   {
-    name: 'Banyan Air Service',
+    name: "Banyan Air Service",
     address: `Fort Lauderdale Executive Airport (KFXE)<br />
     Ft. Lauderdale, FL<br />
     +1 954.491.3170`,
     coordinates: [-80.16916599 - 10, 26.1916659 + 12],
-    type: 'serviceCenter',
+    type: "serviceCenter",
   },
   {
-    name: 'Duncan Aviation',
+    name: "Duncan Aviation",
     address: `Battle Creek Airport (KBTL)<br />
     Battle Creek, MI<br />
     +1 800.525.2376`,
     coordinates: [-85.551164462 - 12, 42.234332396 + 12],
   },
   {
-    name: 'Duncan Aviation',
+    name: "Duncan Aviation",
     address: `Lincoln Airport (KLNK)<br />
     Lincoln, NE<br />
     +1 800.228.4277`,
     coordinates: [-96.755496978 - 12, 40.850663264 + 12],
-    type: 'serviceCenter',
+    type: "serviceCenter",
   },
   {
-    name: 'Elliot Aviation',
+    name: "Elliot Aviation",
     address: `Des Moines Airport (KDSM)<br />
     Des Moines, IA<br />
     +1 800.332.3511`,
     coordinates: [-93.6604968 - 12, 41.5347119 + 12],
-    type: 'serviceCenter',
+    type: "serviceCenter",
   },
   {
-    name: 'Elliot Aviation',
+    name: "Elliot Aviation",
     address: `Flying Cloud Airport (KFCM)<br />
     Eden Prairie, MN<br />
     +1 800.541.9110`,
     coordinates: [-93.4543 - 12, 44.823 + 12],
-    type: 'serviceCenter',
+    type: "serviceCenter",
   },
   {
-    name: 'Elliot Aviation',
+    name: "Elliot Aviation",
     address: `Quad City Airport (KMLI)<br />
     Milan, IL<br />
     +1 800.447.6711`,
     coordinates: [-90.504497982 - 12, 41.44249823 + 12],
-    type: 'serviceCenter',
+    type: "serviceCenter",
   },
   {
-    name: 'Mayo Aviation',
+    name: "Mayo Aviation",
     address: `Fort Lauderdale Executive Airport (KFXE)<br />
     Ft. Lauderdale, FL<br />
     +1 954.491.3170`,
     coordinates: [-87.56281, 45.29327],
   },
   {
-    name: 'Northeast Air',
+    name: "Northeast Air",
     address: `Portland International Jetport (KPWM)<br />
     Portland, ME<br />
     +1 877.354.7881`,
     coordinates: [-70.3055 - 12, 43.641 + 12],
-    type: 'serviceCenter',
+    type: "serviceCenter",
   },
   {
-    name: 'RBR Aviation',
+    name: "RBR Aviation",
     address: `Love Field (KDAL)<br />
     Dallas, TX<br />
     +1 214.351.6604`,
     coordinates: [-96.851349 - 12, 32.848152 + 8],
-    type: 'serviceCenter',
+    type: "serviceCenter",
   },
   {
-    name: 'Rose Aircraft Services, LLC',
-    address: `Fort Lauderdale Executive Airport (KFXE)<br />
-    Ft. Lauderdale, FL<br />
-    +1 954.491.3170`,
-    coordinates: [-87.56281, 45.29327],
-    type: 'serviceCenter',
+    name: "Rose Aircraft Services, Inc",
+    address: `Mena Intermountain Mun. Airport (KMEZ)<br />
+    Mena, AR<br />
+    +1 479.394.2551`,
+    coordinates: [-93.851349 - 12, 32.848152 + 9],
+    type: "serviceCenter",
   },
   {
-    name: 'SoCal Jet Services',
+    name: "SoCal Jet Services",
     address: `Long Beach Airport (KLGB)<br />
     Long Beach, CA<br />
     +1 800.372.1698`,
     coordinates: [-118.151 - 15, 33.8173 + 12],
-    type: 'serviceCenter',
+    type: "serviceCenter",
   },
   {
-    name: 'Western Aircraft',
+    name: "Western Aircraft",
     address: `Boise Airport (KBOI)<br />
     Boise, ID 83705<br />
     +1 800.333.3442`,
     coordinates: [-116.220332452 - 12, 43.558664432 + 12],
-    type: 'serviceCenter',
+    type: "serviceCenter",
   },
   {
-    name: 'Atlas Air Service AG',
+    name: "Atlas Air Service AG",
     address: `Bremen Airport (EDDW)<br />
     Bremen, Germany<br />
     +49 421.53658.760`,
     coordinates: [8.785330192 - 6, 53.041833166 + 12],
-    type: 'serviceCenter',
+    type: "serviceCenter",
   },
   {
-    name: 'ASG Limited',
+    name: "ASG Limited",
     address: `Guernsey International Airport (EGJB)<br />
     Guernsey, Channel Islands<br />
     +44 1481.265750`,
     coordinates: [-2.601164262 - 6, 49.434331596 + 12],
-    type: 'serviceCenter',
+    type: "serviceCenter",
   },
   {
-    name: 'Bromma Air Maintenance AB',
+    name: "Bromma Air Maintenance AB",
     address: `Bromma Airport (ESSB)<br />
     Bromma, Sweden<br />
     +46 8.566.190.00`,
     coordinates: [17.937162918 - 6, 59.352665256 + 12],
-    type: 'serviceCenter',
+    type: "serviceCenter",
   },
   {
-    name: 'Conal',
+    name: "Conal",
     address: `Av. Santos Dumont (SDCO)<br />
     Sorocaba – SP, Brazil<br />
     +55 15.3313.9500`,
     coordinates: [-43.5525 - 3, -21.45667 + 9],
-    type: 'serviceCenter',
+    type: "serviceCenter",
   },
   {
-    name: 'Prince Aviation',
+    name: "Prince Aviation",
     address: `Belgrade Nikola Tesla Airport (LYBE)<br />
     Belgrade, Serbia<br />
     +381 11.209.75.85`,
     coordinates: [20.30416545 - 6, 44.81833006 + 12],
-    type: 'serviceCenter',
+    type: "serviceCenter",
   },
   {
-    name: 'Signature Technicair',
+    name: "Signature Technicair",
     address: `Bournemouth Airport (EGHH)<br />
     Christchurch, Dorset UK<br />
     +44 (0) 1202.573243`,
     coordinates: [-1.838829978 - 6, 50.774663568 + 12],
-    type: 'serviceCenter',
+    type: "serviceCenter",
   },
   {
-    name: 'Solojet Aviação',
+    name: "Solojet Aviação",
     address: `Chacara Aeroporto (SBJD)<br />
     Jundiai – SP, Brazil<br />
     +55 11.4582.7899`,
     coordinates: [-46.88417 - 3, -23.186393 + 9],
-    type: 'serviceCenter',
+    type: "serviceCenter",
   },
   {
-    name: 'Tamarack West Coast Transformation Center',
+    name: "Tamarack West Coast Transformation Center",
     address: `Sandpoint Airport (KSZT)<br />
     Sandpoint, ID<br />
     +1 208.255.4400`,
     coordinates: [-128.56281, 56.29327],
-    type: 'transformationCenter',
+    type: "transformationCenter",
   },
   {
-    name: 'Tamarack East Coast Transformation Center',
+    name: "Tamarack East Coast Transformation Center",
     address: `Aiken Regional Airport (KAIK)<br />
     Aiken, SC<br />
     +1 803.609.7776`,
     coordinates: [-87.56281 + 1, 45.29327 + 1],
-    type: 'transformationCenter',
+    type: "transformationCenter",
   },
   {
-    name: 'Tamarack European Transformation Center',
+    name: "Tamarack European Transformation Center",
     address: `Oxford Airport (EGTK)<br />
     Kidlington, UK<br />
     +44 (0) 1865.502.484`,
     coordinates: [-1.3230496 - 6, 51.8370683 + 12],
-    type: 'transformationCenter',
+    type: "transformationCenter",
   },
 ];
 
 const MapChart = ({ setTooltipContent }) => {
-  const rootEl = document.getElementById('root');
-  const defaultFilter = rootEl.getAttribute('data-show');
+  const rootEl = document.getElementById("root");
+  const defaultFilter = rootEl.getAttribute("data-show");
   const showFilterControls = JSON.parse(
-    rootEl.getAttribute('data-showFilterControls')
+    rootEl.getAttribute("data-showFilterControls")
   );
   const [zoom, setZoom] = useState(1);
   const [center, setCenter] = useState([0, 0]);
-  const [filter, setFilter] = useState(defaultFilter ? defaultFilter : '');
+  const [filter, setFilter] = useState(defaultFilter ? defaultFilter : "");
 
   const markersToFilter = markers.filter((marker) => {
     if (marker.type === filter) return marker;
 
-    if (filter === '') return marker;
+    if (filter === "") return marker;
 
-    return '';
+    return "";
   });
 
   return (
@@ -210,8 +210,8 @@ const MapChart = ({ setTooltipContent }) => {
           <li>
             <button
               type="button"
-              className={filter === '' ? 'active' : ''}
-              onClick={() => setFilter('')}
+              className={filter === "" ? "active" : ""}
+              onClick={() => setFilter("")}
             >
               All
             </button>
@@ -219,11 +219,11 @@ const MapChart = ({ setTooltipContent }) => {
           <li>
             <button
               type="button"
-              className={filter === 'transformationCenter' ? 'active' : ''}
+              className={filter === "transformationCenter" ? "active" : ""}
               onClick={() =>
-                filter === 'transformationCenter'
-                  ? setFilter('')
-                  : setFilter('transformationCenter')
+                filter === "transformationCenter"
+                  ? setFilter("")
+                  : setFilter("transformationCenter")
               }
             >
               Transformation Centers
@@ -232,11 +232,11 @@ const MapChart = ({ setTooltipContent }) => {
           <li>
             <button
               type="button"
-              className={filter === 'serviceCenter' ? 'active' : ''}
+              className={filter === "serviceCenter" ? "active" : ""}
               onClick={() =>
-                filter === 'serviceCenter'
-                  ? setFilter('')
-                  : setFilter('serviceCenter')
+                filter === "serviceCenter"
+                  ? setFilter("")
+                  : setFilter("serviceCenter")
               }
             >
               Service Centers
@@ -364,7 +364,7 @@ const MapChart = ({ setTooltipContent }) => {
         <ZoomableGroup
           zoom={zoom}
           center={center}
-          style={{ transition: 'all 100ms ease' }}
+          style={{ transition: "all 100ms ease" }}
           maxZoom={1}
         >
           <Geographies
@@ -377,49 +377,49 @@ const MapChart = ({ setTooltipContent }) => {
             {({ geographies }) =>
               geographies.map((geo) => {
                 let countries = [
-                  'United States of America',
-                  'United Kingdom',
-                  'Canada',
-                  'Mexico',
-                  'Brazil',
-                  'Australia',
-                  'France',
-                  'Germany',
-                  'Italy',
-                  'Finland',
-                  'Romania',
-                  'Bulgaria',
-                  'Spain',
-                  'Portugal',
-                  'Ireland',
-                  'Norway',
-                  'Sweden',
-                  'Austria',
-                  'Netherlands',
-                  'Bosnia and Herz.',
-                  'Serbia',
-                  'Switzerland',
-                  'Greece',
-                  'Herzegovina',
-                  'Croatia',
-                  'Slovenia',
-                  'Czechia',
-                  'Albania',
-                  'Belgium',
-                  'Luxembourg',
-                  'Switzerland',
-                  'Kosovo',
-                  'Estonia',
-                  'Latvia',
-                  'Poland',
-                  'Liechtenstein',
-                  'Montenegro',
-                  'Hungary',
-                  'Macedonia',
-                  'Amsterdam',
-                  'Bulgaria',
-                  'Romania',
-                  'Slovakia',
+                  "United States of America",
+                  "United Kingdom",
+                  "Canada",
+                  "Mexico",
+                  "Brazil",
+                  "Australia",
+                  "France",
+                  "Germany",
+                  "Italy",
+                  "Finland",
+                  "Romania",
+                  "Bulgaria",
+                  "Spain",
+                  "Portugal",
+                  "Ireland",
+                  "Norway",
+                  "Sweden",
+                  "Austria",
+                  "Netherlands",
+                  "Bosnia and Herz.",
+                  "Serbia",
+                  "Switzerland",
+                  "Greece",
+                  "Herzegovina",
+                  "Croatia",
+                  "Slovenia",
+                  "Czechia",
+                  "Albania",
+                  "Belgium",
+                  "Luxembourg",
+                  "Switzerland",
+                  "Kosovo",
+                  "Estonia",
+                  "Latvia",
+                  "Poland",
+                  "Liechtenstein",
+                  "Montenegro",
+                  "Hungary",
+                  "Macedonia",
+                  "Amsterdam",
+                  "Bulgaria",
+                  "Romania",
+                  "Slovakia",
                 ];
                 let shouldColor = countries.some(() =>
                   countries.includes(geo.properties.NAME)
@@ -428,8 +428,8 @@ const MapChart = ({ setTooltipContent }) => {
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fill={shouldColor ? '#2392D0' : '#EAEAEC'}
-                    stroke={shouldColor ? '#2392D0' : '#EAEAEC'}
+                    fill={shouldColor ? "#2392D0" : "#EAEAEC"}
+                    stroke={shouldColor ? "#2392D0" : "#EAEAEC"}
                   />
                 );
               })
@@ -450,13 +450,13 @@ const MapChart = ({ setTooltipContent }) => {
                   );
                 }}
                 onMouseLeave={() => {
-                  setTooltipContent('');
+                  setTooltipContent("");
                 }}
               >
                 <path
                   d="M10.5 0.917603C5.1141 0.917603 0.75 5.26415 0.75 10.6481C0.75 19.9574 10.5 32.0981 10.5 32.0981C10.5 32.0981 20.25 19.9555 20.25 10.6481C20.25 5.2661 15.8859 0.917603 10.5 0.917603ZM10.5 16.0321C9.10364 16.0321 7.76446 15.4774 6.77708 14.49C5.7897 13.5026 5.235 12.1634 5.235 10.7671C5.235 9.37069 5.7897 8.03151 6.77708 7.04414C7.76446 6.05676 9.10364 5.50205 10.5 5.50205C11.8964 5.50205 13.2355 6.05676 14.2229 7.04414C15.2103 8.03151 15.765 9.37069 15.765 10.7671C15.765 12.1634 15.2103 13.5026 14.2229 14.49C13.2355 15.4774 11.8964 16.0321 10.5 16.0321Z"
                   style={{ opacity: 0.8 }}
-                  fill={type === 'transformationCenter' ? '#0D374F' : '#176490'}
+                  fill={type === "transformationCenter" ? "#0D374F" : "#176490"}
                 />
               </Marker>
             )
