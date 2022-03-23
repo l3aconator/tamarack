@@ -16,9 +16,9 @@
     Portland, ME<br />
     +1 877.354.7881`,coordinates:[-82.3055,55.641],type:"serviceCenter"},{name:"RBR Aviation",address:`Love Field (KDAL)<br />
     Dallas, TX<br />
-    +1 214.351.6604`,coordinates:[-108.851349,40.848152],type:"serviceCenter"},{name:"Rose Aircraft Services, LLC",address:`Fort Lauderdale Executive Airport (KFXE)<br />
-    Ft. Lauderdale, FL<br />
-    +1 954.491.3170`,coordinates:[-87.56281,45.29327],type:"serviceCenter"},{name:"SoCal Jet Services",address:`Long Beach Airport (KLGB)<br />
+    +1 214.351.6604`,coordinates:[-108.851349,40.848152],type:"serviceCenter"},{name:"Rose Aircraft Services, Inc",address:`Mena Intermountain Mun. Airport (KMEZ)<br />
+    Mena, AR<br />
+    +1 479.394.2551`,coordinates:[-105.851349,41.848152],type:"serviceCenter"},{name:"SoCal Jet Services",address:`Long Beach Airport (KLGB)<br />
     Long Beach, CA<br />
     +1 800.372.1698`,coordinates:[-133.151,45.8173],type:"serviceCenter"},{name:"Western Aircraft",address:`Boise Airport (KBOI)<br />
     Boise, ID 83705<br />
